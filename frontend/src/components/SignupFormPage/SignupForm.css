@@ -1,0 +1,64 @@
+.inputs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:650px;
+  justify-content:center;
+}
+.email {
+padding-bottom: 25px;
+font-size: large;
+z-index: 1;
+position: absolute;
+margin-bottom: 70px;
+color:white;
+margin-right:30px;
+
+}
+
+.username{
+  padding-bottom: 25px;
+font-size: large;
+position: absolute;
+margin-top: 10px;
+color:white;
+
+}
+
+.password{
+  padding-bottom: 25px;
+  font-size: large;
+  position: absolute;
+  margin-top: 100px;
+  color:white;
+  margin-right: 2px;
+
+}
+
+.confirm{
+  padding-bottom: 25px;
+  font-size: large;
+  position: absolute;
+  margin-top: 170px;
+  color:white;
+  margin-left:59px;
+
+}
+.picture{
+  height:1000px;
+  width:2000px;
+  z-index: -1;
+}
+
+.submitBtn{
+  position: absolute;
+  margin-top: 250px;
+}
+
+.err{
+  margin-left: 30%;
+  font-size: x-large  ;
+  color:white;
+  position: fixed;
+
+}

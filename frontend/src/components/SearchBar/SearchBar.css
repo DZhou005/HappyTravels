@@ -1,0 +1,8 @@
+input::placeholder{
+  text-align: center;
+}
+
+.search {
+  width: 1000px;
+  height: 35px;
+};
