@@ -24,7 +24,7 @@ module.exports = {
       bookingId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'Bookings'}
+        references: {model: 'Bookings'},
       },
       createdAt: {
         allowNull: false,

@@ -7,7 +7,7 @@ function HomePage() {
   return (
     <div>
       <img src={pic} className="background"/>
-      <h1>Search wherever you want to go...</h1>
+        <h1>Search wherever you want to go...</h1>
     </div>
 
 
