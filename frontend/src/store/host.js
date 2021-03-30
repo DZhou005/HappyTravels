@@ -11,21 +11,22 @@ const setHost = (host) => {
 
 export const host = (listing) => async (dispatch) => {
   console.log("hello")
-  const { location, price, pic, title, description } = listing;
-  const response = await csrfFetch("/api/listings/", {
+  const { location, price, pic, title, description,userId } = listing;
+  console.log("userId:",userId)
+  const response = await csrfFetch("/api/host", {
     method: "POST",
-    headers: {"Content-Type": "multipart/form-data"},
     body: JSON.stringify({
       location,
       price,
       pic,
       title,
-      description
+      description,
+      userId
     }),
   });
   const data = await response.json();
-  console.log(data)
   dispatch(setHost(data.listing));
+  return response;
 };
 
 const hostReducer = (state = {}, action) => {

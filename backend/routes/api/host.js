@@ -10,7 +10,7 @@ const router = express.Router();
 const validateHost = [
   check('location')
     .exists({ checkFalsy: true })
-    .isLength({ min: 10 })
+    // .isLength({ min: 10 })
     .withMessage('Please provide a valid address.'),
   check('price')
     .exists({ checkFalsy: true })
@@ -20,29 +20,24 @@ const validateHost = [
     .withMessage('Please provide a picture of the home.'),
   check('title')
     .exists({ checkFalsy: true })
-    .isLength({ min: 6 })
+    // .isLength({ min: 6 })
     .withMessage('title must be 6 characters or more.'),
   check('description')
   .exists({ checkFalsy: true })
-  .isLength({ min: 25 })
+  // .isLength({ min: 25 })
   .withMessage('description must be 25 characters or more.'),
   handleValidationErrors,
 ];
 
-router.get('/', asyncHandler(async (req,res) => {
-  const booking = await Booking.findAll({})
-  return res.json({booking})
-}))
-
 
 router.post(
-  '/',
+  '',
   validateHost,
   asyncHandler(async (req, res) => {
     console.log("hello------------------------------------")
     const { userId,location, price, pic, title, description } = req.body;
+    console.log("userId:", userId)
     const host = await Booking.create({ userId,location, price, title, pic,description })
-    console.log(host)
     return res.json({
       host,
     });

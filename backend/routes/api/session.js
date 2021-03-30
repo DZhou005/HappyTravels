@@ -9,7 +9,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 
 const router = express.Router();
-
+console.log("using session file")
 const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })

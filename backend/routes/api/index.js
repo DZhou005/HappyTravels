@@ -7,6 +7,6 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
-router.use('/listings', hostRouter);
+router.use('/host', hostRouter);
 
 module.exports = router;
