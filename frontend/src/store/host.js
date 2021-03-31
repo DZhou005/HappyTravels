@@ -1,46 +1,56 @@
 import { csrfFetch } from './csrf';
 
-const SET_HOST= 'session/setHost'
+const SET_HOST= 'session/setHost';
 
 const setHost = (host) => {
   return {
     type: SET_HOST,
-     payload:host,
+     payload: host,
   }
 }
 
 export const host = (listing) => async (dispatch) => {
-  console.log("hello")
-  const { location, price, pic, title, description,userId } = listing;
-  console.log("userId:",userId)
+  const { location, price, images, image, title, description,userId } = listing;
+  const formData = new FormData();
+  formData.append("location", location);
+  formData.append("price", price);
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("userId", userId);
+
+  if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
+
+  // for single file
+  if (image) formData.append("image", image);
+
+
   const response = await csrfFetch("/api/host", {
     method: "POST",
-    body: JSON.stringify({
-      location,
-      price,
-      pic,
-      title,
-      description,
-      userId
-    }),
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
   });
   const data = await response.json();
   dispatch(setHost(data.listing));
   return response;
 };
 
-const hostReducer = (state = {}, action) => {
 
+
+const hostReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_HOST:
-          // newState = Object.assign({}, state);
-          // newState.host = action.payload;
-          // return newState;
           return {...state, listing:action.payload}
           default:
           return state;
-
   }
 }
+
+
 
 export default hostReducer;

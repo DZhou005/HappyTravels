@@ -7,27 +7,21 @@ import * as hostActions from "../../store/host";
 import picture from "../../images/Airbnb-TravelTrends2021-Header.webp"
 
 function HostPage() {
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
-  const [pic, setPic] = useState("");
+  const [pic, setPic] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
-  const updateFile = ((e) => {
-    const file = e.target.files[0]
-    if (file) setPic(file)
-  })
-  
+
+  const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+
   if (!sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello1")
-    console.log(title)
     if (title.length >= 10) {
-      console.log("hello2")
       setErrors([]);
       return dispatch(hostActions.host({ location, price, pic, title, description, userId:sessionUser.id }))
         .then(() => {
@@ -45,6 +39,11 @@ function HostPage() {
     }
     return setErrors(["title must be at least 10 character long"])
   };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if(file) setPic(file)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -81,14 +80,16 @@ function HostPage() {
             />
           </label>
           <label className="description">
-            Descrpition:
             <textarea
+              rows="6"
+              cols="50"
+              placeholder="Please describe your home...."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
             />
           </label>
-          <label className="pic">
+          <label className="upload">
             Upload a picture:
             <input
               type="file"

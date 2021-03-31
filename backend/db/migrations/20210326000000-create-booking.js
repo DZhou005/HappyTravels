@@ -18,7 +18,7 @@ module.exports = {
       },
       pic: {
         allowNull: false,
-        type: Sequelize.BLOB
+        type: Sequelize.STRING
       },
       title: {
         allowNull: false,

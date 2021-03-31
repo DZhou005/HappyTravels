@@ -1,4 +1,4 @@
-/* .hostInputs {
+ .hostInputs {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,13 +7,14 @@
 }
 
 .location {
-  padding-bottom: 25px;
+  padding-bottom: 10px;
   font-size: large;
   z-index: 1;
   position: absolute;
-  margin-bottom: 70px;
+  margin-bottom: 100px;
   color:white;
   margin-right:30px;
+
 
   }
 
@@ -23,6 +24,7 @@
   position: absolute;
   margin-top: 10px;
   color:white;
+  margin-left: 20px;
 
   }
 
@@ -32,7 +34,7 @@
     position: absolute;
     margin-top: 100px;
     color:white;
-    margin-right: 2px;
+    margin-right: 53px;
 
   }
 
@@ -40,21 +42,31 @@
     padding-bottom: 25px;
     font-size: large;
     position: absolute;
-    margin-top: 170px;
+    margin-top: 350px;
     color:white;
-    margin-left:59px;
+    margin-right: 10px;
 
   }
   .pic{
     height:1000px;
-    width:2000px;
+    width:2600px;
     z-index: -1;
   }
 
   .submitHost{
     position: absolute;
-    margin-top: 250px;
+    margin-top: 600px;
   }
+  .upload{
+    font-size: large;
+    position: absolute;
+    margin-top: 160px;
+    color:white;
+    margin-left: 134px;
+
+
+  }
+
 
   .err{
     margin-left: 30%;
@@ -62,4 +74,4 @@
     color:white;
     position: fixed;
 
-  } */
+  }

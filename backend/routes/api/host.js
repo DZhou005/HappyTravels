@@ -4,6 +4,9 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Booking } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3')
+
+
 
 const router = express.Router();
 
@@ -31,17 +34,26 @@ const validateHost = [
 
 
 router.post(
-  '',
+  '/',
+  singleMulterUpload("pic"),
   validateHost,
   asyncHandler(async (req, res) => {
-    console.log("hello------------------------------------")
-    const { userId,location, price, pic, title, description } = req.body;
-    console.log("userId:", userId)
-    const host = await Booking.create({ userId,location, price, title, pic,description })
+    const { userId,location, price, title, description } = req.body;
+    const profileImageUrl = await singlePublicFileUpload(req.file);
+    const host = await Booking.create({ userId,location, price, title, profileImageUrl,description })
+
+    setTokenCookie(res, host);
+    
     return res.json({
       host,
     });
   }),
 );
+
+router.get('/:id', asyncHandler(async (req, res) => {
+  const postId = parseInt(req.params.id, 10);
+  const post = await Booking.findByPk(postId);
+  return res.json(post)
+}))
 
 module.exports = router;
