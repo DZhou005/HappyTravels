@@ -5,19 +5,8 @@ const { Booking } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3')
-const { updateListing } = require("../../../frontend/src/store/booking")
-async function update(details) {
-  const id = details.id;
-  delete details.id;
-  await Booking.update(
-    details, {
-      where: { id },
-      returning: true,
-      plain: true,
-    }
-  );
-  return id;
-}
+
+
 
 const router = express.Router();
 
@@ -47,9 +36,8 @@ const validateHost = [
 router.post(
   '/',
   singleMulterUpload("pic"),
-  validateHost,
+  // validateHost,
   asyncHandler(async (req, res) => {
-    console.log("helloooooo", req.file)
     const { userId,location, price, title, description } = req.body;
 
       const pic = await singlePublicFileUpload(req.file);
@@ -63,20 +51,19 @@ router.post(
 );
 
 router.get('/:id', asyncHandler(async (req, res) => {
-  console.log("it is hitting here")
   const postId = parseInt(req.params.id, 10);
-  console.log("postid:---------------------", postId)
   const post = await Booking.findByPk(postId);
   return res.json(post)
 }))
 
 
-router.put('/:id', asyncHandler(async (req, res) => {
-  console.log("it is here not there")
-  const listing = await Booking.updateListing(req.body);
-  return res.json(listing)
+router.put('/:id', singleMulterUpload("pic"),asyncHandler(async (req, res) => {
+  const { userId,location, price, title, description } = req.body;
+  const pic = await singlePublicFileUpload(req.file);
+  const post = await Booking.update({ userId,location, price, title, pic, description }, { where: { id:req.params.id}, returning: true, plain:true, })
+  console.log("post:", post)
+  return res.json(post)
 }))
-
 
 
 module.exports = router;
