@@ -39,3 +39,9 @@
   justify-content:  center;
   overflow: scroll;
 }
+
+.housePic {
+  height: 700px;
+  width: 1300px;
+  box-shadow: lightgray;
+}

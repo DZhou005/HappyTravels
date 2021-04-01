@@ -10,7 +10,7 @@ const setHost = (host) => {
 }
 
 export const host = (listing) => async (dispatch) => {
-  const { location, price, images, image, title, description,userId } = listing;
+  const { location, price, images, pic, title, description,userId } = listing;
   const formData = new FormData();
   formData.append("location", location);
   formData.append("price", price);
@@ -18,15 +18,10 @@ export const host = (listing) => async (dispatch) => {
   formData.append("description", description);
   formData.append("userId", userId);
 
-  if (images && images.length !== 0) {
-    for (var i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
-    }
-  }
-
   // for single file
-  if (image) formData.append("image", image);
+  if (pic) formData.append("pic", pic);
 
+  console.log("formData:",formData)
 
   const response = await csrfFetch("/api/host", {
     method: "POST",
@@ -37,7 +32,6 @@ export const host = (listing) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(setHost(data.listing));
-  return response;
 };
 
 
@@ -45,7 +39,7 @@ export const host = (listing) => async (dispatch) => {
 const hostReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_HOST:
-          return {...state, listing:action.payload}
+          return { ...state, listing: action.payload }
           default:
           return state;
   }

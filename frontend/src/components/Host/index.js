@@ -16,14 +16,13 @@ function HostPage() {
 
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-
   if (!sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title.length >= 10) {
       setErrors([]);
-      return dispatch(hostActions.host({ location, price, pic, title, description, userId:sessionUser.id }))
+        dispatch(hostActions.host({ location, price, pic, title, description, userId:sessionUser.id }))
         .then(() => {
           setLocation("");
           setPrice("");
@@ -32,9 +31,10 @@ function HostPage() {
           setDescription("")
 
         })
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+        .catch(async (error) => {
+          console.log(error)
+          // const data = await res.json();
+          // if (data && data.errors) setErrors(data.errors);
         });
     }
     return setErrors(["title must be at least 10 character long"])
