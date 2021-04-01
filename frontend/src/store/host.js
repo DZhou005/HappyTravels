@@ -31,6 +31,7 @@ export const host = (listing) => async (dispatch) => {
     body: formData,
   });
   const data = await response.json();
+  console.log("this is data:========", data)
   dispatch(setHost(data.listing));
 };
 

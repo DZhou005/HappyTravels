@@ -24,7 +24,7 @@ function Booking () {
 
   if(sessionUser && showEdit) {
   content= (
-    <EditHostPage/>
+    <EditHostPage book={book} hideForm={() => setShowEdit(false)} />
   )
   }
 
@@ -32,17 +32,15 @@ function Booking () {
   return (
     <>
       <div className="everything">
-        <img src={book?.pic} className="housePic"/>
-        <h2 className="listingTitle">{book?.title}</h2>
-        <h2 className="listingLocation">LOCATION:{book?.location}</h2>
-        <h2 className="listingPrice">PRICE PER NIGHT:${book?.price}</h2>
-        <h3 className="listingDescription">{book?.description}</h3>
-        <h4 className="createdAt">POSTED:{book?.createdAt}</h4>
-        <button onClick={() => setShowEdit(true)}>Edit</button>
+          <img src={book?.pic} className="housePic"/>
+          <h2 className="listingTitle">{book?.title}</h2>
+          <h2 className="listingLocation">LOCATION:{book?.location}</h2>
+          <h2 className="listingPrice">PRICE PER NIGHT:${book?.price}</h2>
+          <h3 className="listingDescription">{book?.description}</h3>
+          <h4 className="createdAt">POSTED:{book?.createdAt}</h4>
+          <button onClick={() => setShowEdit(true)}>Edit</button>
         {content}
       </div>
-
-
     </>
   )
 }

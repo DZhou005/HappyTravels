@@ -1,11 +1,17 @@
 import { csrfFetch } from './csrf';
 
 const CURRENT_ONE = 'booking/CURRENT_ONE';
+const UPDATE_POST = 'booking/UPDATE_POST'
 
 
 const currentBooking = booking => ({
   type: CURRENT_ONE,
   payload:booking,
+})
+
+const update = booking => ({
+  type: UPDATE_POST,
+  booking,
 })
 
 export const getOneHost = (id) => async dispatch => {
@@ -24,15 +30,25 @@ const initialState = {
 };
 
 export const updateListing = (data) => async dispatch => {
-  console.log("data:", data.id)
+  const { location, price, images, pic, title, description,userId } = data;
+  const formData = new FormData();
+  formData.append("location", location);
+  formData.append("price", price);
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("userId", userId);
+
+  // for single file
+  if (pic) formData.append("pic", pic);
+
   const response = await csrfFetch(`/api/host/${data.id}`, {
     method: 'put',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
+    headers: {'Content-Type': 'multipart/form-data',},
+    body: formData,
   })
-  if (response.ok) {
+  if (response) {
     const listing = await response.json();
-    dispatch(currentBooking(listing));
+    dispatch(currentBooking(listing[1]));
     return listing;
   }
 }

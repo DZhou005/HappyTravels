@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { updateListing, getOneHost } from "../store/booking"
 
 
-function EditHostPage({ book }) {
+function EditHostPage({ book, hideForm }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const userId = sessionUser.id
 
-
+  const { id } = useParams()
   const [location, setLocation] = useState(book?.location);
   const [price, setPrice] = useState(book?.price);
   const [pic, setPic] = useState(book?.pic);
@@ -21,16 +23,16 @@ function EditHostPage({ book }) {
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
 
-  useEffect(() => {
-    dispatch(getOneHost());
-  }, [dispatch])
+  // useEffect(() => {
+  //   // dispatch(getOneHost());
+  // }, [dispatch])
 
-
-  const handleSubmit = (e) => {
+  console.log("picc:", pic)
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = {
-      ...book,
+      id,
+      userId,
       location,
       price,
       pic,
@@ -38,15 +40,15 @@ function EditHostPage({ book }) {
       description,
     }
 
-    // let updatedListing = dispatch(updateListing(payload));
-    // // if (updatedListing) {
-    // //   hideForm()
-    // // }
+    let updatedListing = await dispatch(updateListing(payload));
+    if (updatedListing) {
+      hideForm();
+    }
   };
 
   const handleCancelClick = (e) => {
     e.preventDefault();
-    // hideForm();
+    hideForm();
   };
 
   return (
