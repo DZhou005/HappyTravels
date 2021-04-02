@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './host.css';
 import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
 import * as hostActions from "../../store/host";
 import picture from "../../images/Airbnb-TravelTrends2021-Header.webp"
 

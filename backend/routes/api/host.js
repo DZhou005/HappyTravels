@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Booking } = require('../../db/models');
+const { Booking, Review } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3')
@@ -50,6 +50,16 @@ router.post(
   }),
 );
 
+router.post('/:id', asyncHandler(async (req, res) => {
+  const { description, rating, userId, bookingId } = req.body;
+  const review = await Review.create({ description, rating, userId, bookingId })
+
+  return res.json({
+    review,
+  })
+}))
+
+
 router.get('/:id', asyncHandler(async (req, res) => {
   const postId = parseInt(req.params.id, 10);
   const post = await Booking.findByPk(postId);
@@ -61,9 +71,15 @@ router.put('/:id', singleMulterUpload("pic"),asyncHandler(async (req, res) => {
   const { userId,location, price, title, description } = req.body;
   const pic = await singlePublicFileUpload(req.file);
   const post = await Booking.update({ userId,location, price, title, pic, description }, { where: { id:req.params.id}, returning: true, plain:true, })
-  console.log("post:", post)
   return res.json(post)
 }))
 
+
+router.delete("/:id", asyncHandler(async (req, res) => {
+  const id = parseInt(req.params.id, 10)
+  const post = await Booking.findByPk(id);
+  await post.destroy();
+  res.json({ message: 'sucess' })
+}))
 
 module.exports = router;

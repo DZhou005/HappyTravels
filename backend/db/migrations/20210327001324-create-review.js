@@ -14,7 +14,12 @@ module.exports = {
       },
       rating: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        validate: {
+          min: 0,
+          max: 10
+        }
+
       },
       userId: {
         allowNull: false,

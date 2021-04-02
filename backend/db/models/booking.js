@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Booking.associate = function(models) {
     Booking.belongsTo(models.User, {foreignKey: 'userId'})
-    Booking.hasMany(models.Review, {foreignKey: 'bookingId'})
+    Booking.hasMany(models.Review, {foreignKey: 'bookingId', onDelete: 'CASCADE'})
   };
   return Booking;
 };

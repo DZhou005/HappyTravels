@@ -21,8 +21,6 @@ export const host = (listing) => async (dispatch) => {
   // for single file
   if (pic) formData.append("pic", pic);
 
-  console.log("formData:",formData)
-
   const response = await csrfFetch("/api/host", {
     method: "POST",
     headers: {
@@ -31,7 +29,6 @@ export const host = (listing) => async (dispatch) => {
     body: formData,
   });
   const data = await response.json();
-  console.log("this is data:========", data)
   dispatch(setHost(data.listing));
 };
 

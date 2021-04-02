@@ -23,11 +23,6 @@ function EditHostPage({ book, hideForm }) {
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
 
-  // useEffect(() => {
-  //   // dispatch(getOneHost());
-  // }, [dispatch])
-
-  console.log("picc:", pic)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
