@@ -45,11 +45,6 @@ export const deletePost = (id) => async dispatch => {
 }
 
 
-const initialState = {
-  list: [],
-  types: []
-};
-
 export const updateListing = (data) => async dispatch => {
   const { location, price, images, pic, title, description,userId } = data;
   const formData = new FormData();
@@ -75,22 +70,24 @@ export const updateListing = (data) => async dispatch => {
 }
 
 export const review = (comment) => async (dispatch) => {
-  
- const response = await csrfFetch(`/api/host/${comment.bookingId}`, {
-   method: "POST",
-   headers: {
-     'Content-Type': 'application/json',
-   },
-   body: JSON.stringify(comment),
- })
-  if(response.ok) {
-    const data = await response.json();
-    dispatch(setReview(data))
-    return data;
-  }
-}
 
-const bookingReducer = (state = initialState, action) => {
+  const response = await csrfFetch(`/api/host/${comment.bookingId}`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(comment),
+  })
+   if(response.ok) {
+     const data = await response.json();
+     dispatch(setReview(data))
+     return data;
+   }
+ }
+
+
+
+const bookingReducer = (state = {}, action) => {
   switch (action.type) {
     case CURRENT_ONE: {
       const newState = { ...state, ["currentBooking"]: action.payload}
@@ -102,6 +99,7 @@ const bookingReducer = (state = initialState, action) => {
       return newState;
     }
     case SET_REVIEW:
+      let reviews = [...state.review]
       return { ...state, listing: action.review }
       default:
       return state;

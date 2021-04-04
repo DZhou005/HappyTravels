@@ -45,3 +45,22 @@
   width: 1300px;
   box-shadow: lightgray;
 }
+
+.reviews{
+  border-bottom: 3px solid gray;
+  width: 1200px;
+  margin-top: 30px;
+  display:flex;
+  justify-content:  center;
+
+}
+.submitForm{
+  display: flex;
+  justify-content: center;
+}
+
+.theSubmitReviewButton {
+  display:flex;
+  margin-left:350px;
+}
+

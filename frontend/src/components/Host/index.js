@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './host.css';
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as hostActions from "../../store/host";
 import picture from "../../images/Airbnb-TravelTrends2021-Header.webp"
 
@@ -12,37 +12,25 @@ function HostPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
-
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   if (!sessionUser) return <Redirect to="/" />;
 
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.length >= 10) {
-      setErrors([]);
-        dispatch(hostActions.host({ location, price, pic, title, description, userId:sessionUser.id }))
-        .then(() => {
-          setLocation("");
-          setPrice("");
-          setPic(null);
-          setTitle("");
-          setDescription("")
-
-        })
-        .catch(async (error) => {
-          console.log(error)
-          // const data = await res.json();
-          // if (data && data.errors) setErrors(data.errors);
-        });
-    }
-    return setErrors(["title must be at least 10 character long"])
+    dispatch(hostActions.host({ location, price, pic, title, description, userId:sessionUser.id }));
+    history.push(`/`)
   };
 
   const updateFile = (e) => {
     const file = e.target.files[0];
     if(file) setPic(file)
   }
+
 
   return (
     <form onSubmit={handleSubmit}>

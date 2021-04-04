@@ -54,6 +54,24 @@ function Booking () {
       history.push('/')
     }
 
+    const listOfReviews = [];
+
+  if(book?.Reviews) {
+    book?.Reviews.map((review) => {
+      listOfReviews.push(
+      <li key={review.id}>
+        user {review.userId}'s review:<br></br>
+        Rating:<br></br>{
+        review.rating}/10 <br></br>
+        Description:<br></br>
+        {review.description}
+        <br></br>
+        <br></br>
+      </li>
+      )
+    })
+  }
+
   return (
     <>
       <div className="everything">
@@ -67,7 +85,10 @@ function Booking () {
           <button onClick={() => deleteAction()}
           >Delete</button>
         {content}
-
+        <h2 className="reviews">REVIEWS</h2>
+          <ul>
+            {listOfReviews}
+          </ul>
         <form onSubmit={handleSubmit}>
           <ul>
             <label>
@@ -81,6 +102,8 @@ function Booking () {
             <label>
               Leave your reviews:
               <textarea
+              cols="40"
+              rows="5"
               placeholder="Please describe your experience"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -88,7 +111,7 @@ function Booking () {
               </textarea>
             </label>
           </ul>
-          <button type="submit">Submit Your Review</button>
+          <button className="theSubmitReviewButton" type="submit">Submit Your Review</button>
         </form>
       </div>
     </>

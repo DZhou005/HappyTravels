@@ -32,8 +32,6 @@ export const host = (listing) => async (dispatch) => {
   dispatch(setHost(data.listing));
 };
 
-
-
 const hostReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_HOST:

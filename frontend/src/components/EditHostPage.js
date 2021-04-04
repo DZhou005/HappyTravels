@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { updateListing, getOneHost } from "../store/booking"
+import "./Host/host.css"
 
 
 function EditHostPage({ book, hideForm }) {
@@ -97,7 +98,7 @@ function EditHostPage({ book, hideForm }) {
               required
             />
           </label>
-          <button type="submit" className="submitHost">Update Listing</button>
+          <button type="submit" className="updateListingSubmit">Update Listing</button>
           <button type="button" onClick={handleCancelClick}>Cancel</button>
       </section>
     </form>

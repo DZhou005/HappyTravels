@@ -19,27 +19,23 @@ button {
 button:hover{
   box-shadow: 0 12px 16px 0 white, 0 17px 50px 0 white;
 }
-.signUp, .homebutton {
-  margin-right: 10px;
-  background-color: #e1ecf4;
-  color: #39739d;
-  border: 1px solid #7aa7c7;
-  padding: .4em;
-  font-size: 13px;
-  margin-top: 10px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+.signUp, .homebutton{
+   color: white
 }
-.signUp:hover, .homebutton:hover {
-  box-shadow: 0 12px 16px 0 white, 0 17px 50px 0 white;
+.yourListings{
+  color:white;
+  font-size:large;
 }
 
-.homebutton {
-  margin-right: 40px;
-}
 
 .search{
   margin-left: 110px;
   margin-right: 80px
+}
+
+.host {
+  display: flex;
+  color: white;
+  font-size: 20px;
+
 }

@@ -62,9 +62,20 @@ router.post('/:id', asyncHandler(async (req, res) => {
 
 router.get('/:id', asyncHandler(async (req, res) => {
   const postId = parseInt(req.params.id, 10);
-  const post = await Booking.findByPk(postId);
+  const post = await Booking.findOne({
+    where: {
+      id: postId
+     },
+     include: {
+       model: Review
+     }
+    });
   return res.json(post)
 }))
+
+
+
+
 
 
 router.put('/:id', singleMulterUpload("pic"),asyncHandler(async (req, res) => {

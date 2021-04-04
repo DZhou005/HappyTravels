@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchBar from '../SearchBar';
 import "../HomePage/HomePage.css";
 import pic from '../../images/9928.gif'
 

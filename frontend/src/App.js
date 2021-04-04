@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage/index"
 import HostPage from "./components/Host/index"
 import Booking from "./components/Bookings/booking"
+import ShowPages from "./components/pages/pages"
+
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +33,9 @@ function App() {
           </Route>
           <Route path="/host/:id" exact>
             <Booking />
+          </Route>
+          <Route path="/pages" exact>
+            <ShowPages/>
           </Route>
         </Switch>
       )}
