@@ -32,7 +32,11 @@ function ShowPages () {
 
   return (
     <div>
-      <ul>
+      <ul className="allUserListings">
+        Here are all your current listings:
+        <br></br>
+        <br></br>
+        <br></br>
         {yourPages}
       </ul>
 

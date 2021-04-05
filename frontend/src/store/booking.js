@@ -90,7 +90,7 @@ export const review = (comment) => async (dispatch) => {
 const bookingReducer = (state = {}, action) => {
   switch (action.type) {
     case CURRENT_ONE: {
-      const newState = { ...state, ["currentBooking"]: action.payload}
+      const newState = { ...state, ["currentBooking"]: {...action.payload}}
       return newState;
     }
     case REMOVE_POST: {
@@ -99,8 +99,7 @@ const bookingReducer = (state = {}, action) => {
       return newState;
     }
     case SET_REVIEW:
-      let reviews = [...state.review]
-      return { ...state, listing: action.review }
+      return { ...state, listing:action.review }
       default:
       return state;
   }

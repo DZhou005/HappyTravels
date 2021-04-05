@@ -23,7 +23,7 @@ function HostPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(hostActions.host({ location, price, pic, title, description, userId:sessionUser.id }));
-    history.push(`/`)
+    history.push(`/pages`)
   };
 
   const updateFile = (e) => {

@@ -22,7 +22,7 @@ export const getAllPages = () => async dispatch => {
 const PagesReducer = (state = {}, action) => {
   switch(action.type) {
     case ALL_PAGES: {
-      const newState = { allListings: action.payload }
+      const newState = { ...state, allListings: action.payload }
       return newState;
     }
     default:
